@@ -1,1 +1,1 @@
-export * from './hashing.js';
+export {default as HashBcrypt} from './HashBcrypt.js';

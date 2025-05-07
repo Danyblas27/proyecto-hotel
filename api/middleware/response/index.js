@@ -1,2 +1,2 @@
-export { default as successResponse } from "./successResponse.js";
-export { default as errorHandler } from "./errorHandler.js";
+export {errorHandler } from './errorHandler.js';
+export {successResponse} from './successResponse.js';

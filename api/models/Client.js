@@ -12,7 +12,7 @@ class Client {
             this.idDocOfficial = data.idDocOfficial
     }
 
-    static async saveClient(this, data) {
+    static async saveClient(data) {
         // if (!data.nombre) {
         //     const error = new Error("El nombre es obligatorio");
         //     error.code = CodeStatus.BadRequest; // 400

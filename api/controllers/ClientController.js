@@ -1,8 +1,11 @@
-import Client from "../../models/Client";
-import bodyParser from "../../utils/bodyParser";
 
-import * as responses from "../../middleware/response";
-import CodeStatus from "../../utils/types/codeStatus";
+
+import { responses } from "../middleware/index.js";
+import { Client } from "../models/index.js";
+import { bodyParser, CodeStatus } from "../utils/index.js";
+
+
+
 
 
 const ClientController = {

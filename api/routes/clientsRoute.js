@@ -1,17 +1,10 @@
-import ClientController from "../controllers/ClientController.js";
-import CodeStatus from "../utils/types/codeStatus.js";
+import express from 'express';
+import { ClientController } from '../controllers/index.js';
 
 
+const router = express.Router();
 
-const clientRoute = async (req, res) => {
+//? Routes
+router.post('api/clients/create', ClientController.createClient);
 
-    if (req.method === 'POST') {
-        if (req.method === 'POST') {
-            await ClientController.createClient(req, res); 
-        } else {
-            responses.errorHandler(res, CodeStatus.MethodNotAllowed, "Método no permitido");
-        }
-    } 
-}
-
-export default clientRoute;
+export default router;

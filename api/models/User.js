@@ -1,4 +1,5 @@
-import { hashPassword } from "../../utils/passwords";
+import { HashBcrypt } from "../utils/index.js";
+
 
 class User {
 
@@ -19,7 +20,7 @@ class User {
     }
 
     static async saveUser(data) {
-        const hashedPassword = hashPassword(data.password);
+        const hashedPassword = HashBcrypt.hashPassword(data.password);
         const sql = `INSERT INTO users (name, email, password, rol) VALUES (?, ?, ?, ?)`;
         const params = [data.name, data.email, hashedPassword, data.rol];
         return queryHelper.query(sql, params)

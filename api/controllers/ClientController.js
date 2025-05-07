@@ -1,8 +1,8 @@
-import Client from "../models/Client";
-import bodyParser from "../utils/bodyParser";
+import Client from "../../models/Client";
+import bodyParser from "../../utils/bodyParser";
 
-import * as responses from "../middleware/response";
-import CodeStatus from "../utils/types/codeStatus";
+import * as responses from "../../middleware/response";
+import CodeStatus from "../../utils/types/codeStatus";
 
 
 const ClientController = {
@@ -11,7 +11,7 @@ const ClientController = {
         try {
             const data = await bodyParser(req);
             const newClient = await Client.saveClient(data);
-            responses.successResponse(res, CodeStatus.Created , "Client created successfully", newClient);
+            responses.successResponse(res, CodeStatus.Created, "Client created successfully", newClient);
         } catch (err) {
             const statusCode = err.code || CodeStatus.ServerError;
             responses.errorHandler(res, statusCode, err.message);
@@ -19,7 +19,7 @@ const ClientController = {
     },
 
 
-} 
+}
 
 export default ClientController;
 

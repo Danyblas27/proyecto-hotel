@@ -2,8 +2,7 @@ import queryHelper from '../database/queryHelper.js';
 
 class Client {
     constructor(data) {
-        this.id = data.id,
-            this.email = data.email,
+        this.email = data.email,
             this.name = data.name,
             this.lastName = data.lastName,
             this.country = data.country,
@@ -13,7 +12,7 @@ class Client {
             this.idDocOfficial = data.idDocOfficial
     }
 
-    static async saveClient(data) {
+    static async saveClient(this, data) {
         // if (!data.nombre) {
         //     const error = new Error("El nombre es obligatorio");
         //     error.code = CodeStatus.BadRequest; // 400
@@ -21,7 +20,16 @@ class Client {
         // }
 
         const sql = `INSERT INTO clients (email, name, last_name, country, code_number, telephone_number, type_doc_official, id_doc_official) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-        const params = [data.email, data.name, data.lastName, data.country, data.codeNumber, data.telephoneNumber, data.typeDocOfficial, data.idDocOfficial];
+        const params = [
+            data.email,
+            data.name,
+            data.lastName,
+            data.country,
+            data.codeNumber,
+            data.telephoneNumber,
+            data.typeDocOfficial,
+            data.idDocOfficial
+        ];
         return queryHelper.query(sql, params)
             .then(result => {
                 return new Client({

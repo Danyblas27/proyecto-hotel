@@ -1,14 +1,25 @@
+import Client from "../models/Client";
+import bodyParser from "../utils/bodyParser";
 
-const bodyParser = require("../utils/bodyParser");
-const errorHandler = require("../middleware/errorHandler");
+import * as responses from "../middleware/response";
+import CodeStatus from "../utils/types/codeStatus";
 
-exports.createClient = async (req, res) => {
-  try {
-    const data = await bodyParser(req);
-    const newClient = await Client.save(data);
-    res.writeHead(201, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(newClient));
-  } catch (err) {
-    errorHandler(res, 500, err.message);
-  }
-};
+
+const ClientController = {
+
+    createClient: async (req, res) => {
+        try {
+            const data = await bodyParser(req);
+            const newClient = await Client.saveClient(data);
+            responses.successResponse(res, CodeStatus.Created , "Client created successfully", newClient);
+        } catch (err) {
+            const statusCode = err.code || CodeStatus.ServerError;
+            responses.errorHandler(res, statusCode, err.message);
+        }
+    },
+
+
+} 
+
+export default ClientController;
+

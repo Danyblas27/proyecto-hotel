@@ -6,7 +6,11 @@ const bodyParser = (req) => {
                 body += chunk.toString();
             });
             req.on("end", () => {
-                resolve(JSON.parse(body));
+                try {
+                    resolve(JSON.parse(body));
+                } catch (err) {
+                    reject(new Error("JSON inválido en el cuerpo de la solicitud"));
+                }
             });
         } catch (error) {
             reject(error);

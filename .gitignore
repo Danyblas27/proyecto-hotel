@@ -40,7 +40,7 @@ tmp/
 temp/
 
 # MySQL dumps or test data
-*.sql
+# *.sql
 *.dump
 
 # TypeScript

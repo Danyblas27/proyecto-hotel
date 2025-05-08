@@ -1,19 +1,27 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 
-import { responses } from './middleware/index.js';
-import { clientsRoute, usersRoute } from './routes/index.js';
+import { responses, verifyToken } from './middleware/index.js';
+import { authRoute, clientsRoute, usersRoute } from './routes/index.js';
+
+dotenv.config();
 
 const app = express();
 
 //? Middlewares global
 app.use(express.json());
+app.use(cookieParser());
 
 //? Route
 app.use('/api/clients', clientsRoute);
 app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoute);
+// app.use('/api/dashboard', verifyToken, dashboardRoute);
 
 //? Middleware error handler
 app.use(responses.errorHandler);
+
 
 
 const PORT = process.env.PORT || 3000;

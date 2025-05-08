@@ -4,10 +4,6 @@ import { responses } from "../middleware/index.js";
 import { Client } from "../models/index.js";
 import { bodyParser, CodeStatus } from "../utils/index.js";
 
-
-
-
-
 const ClientController = {
 
     createClient: async (req, res) => {

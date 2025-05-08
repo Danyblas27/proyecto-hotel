@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { responses } from './middleware/index.js';
-import { clientsRoute } from './routes/index.js';
+import { clientsRoute, usersRoute } from './routes/index.js';
 
 const app = express();
 
@@ -10,6 +10,7 @@ app.use(express.json());
 
 //? Route
 app.use('/api/clients', clientsRoute);
+app.use('/api/users', usersRoute);
 
 //? Middleware error handler
 app.use(responses.errorHandler);

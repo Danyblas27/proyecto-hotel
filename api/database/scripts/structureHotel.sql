@@ -17,6 +17,7 @@ USE hotel_system;
 CREATE TABLE
   users (
     id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     role ENUM ('Admin', 'Recepcion') NOT NULL,

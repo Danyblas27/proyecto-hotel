@@ -1,3 +1,4 @@
+import queryHelper from "../database/queryHelper.js";
 import { HashBcrypt } from "../utils/index.js";
 
 
@@ -20,8 +21,8 @@ class User {
     }
 
     static async saveUser(data) {
-        const hashedPassword = HashBcrypt.hashPassword(data.password);
-        const sql = `INSERT INTO users (name, email, password, rol) VALUES (?, ?, ?, ?)`;
+        const hashedPassword = await HashBcrypt.hashPassword(data.password);
+        const sql = `INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`;
         const params = [data.name, data.email, hashedPassword, data.rol];
         return queryHelper.query(sql, params)
             .then(result => {

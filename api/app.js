@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
 import { responses } from './middleware/index.js';
-import { authRoute, clientsRoute, usersRoute } from './routes/index.js';
+import { authRoute, clientsRoute, roomsRoute, usersRoute } from './routes/index.js';
 
 dotenv.config();
 
@@ -14,9 +14,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 //? Route
+app.use('/api/auth', authRoute);
+app.use('/api/rooms', roomsRoute);
 app.use('/api/clients', clientsRoute);
 app.use('/api/users', usersRoute);
-app.use('/api/auth', authRoute);
 // app.use('/api/dashboard', verifyToken, dashboardRoute);
 
 //? Middleware error handler

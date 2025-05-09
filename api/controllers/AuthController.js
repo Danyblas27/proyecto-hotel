@@ -13,7 +13,7 @@ const AuthController = {
 
         try {
 
-            UserController.createUser(req, res, next);
+            UserController.create(req, res, next);
 
         } catch (error) {
             error.code = error.code || CodeStatus.ServerError;
@@ -47,15 +47,11 @@ const AuthController = {
                 maxAge: 1000 * 60 * 60 * 2, // 2 horas
             });
 
+            const userData = User.toJSONSafe(user);
             res.status(CodeStatus.OK).json({
                 message: "Login successful",
                 token,
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    role: user.role
-                }
+                data: userData
             });
 
         } catch (error) {
@@ -75,7 +71,7 @@ const AuthController = {
         }
     },
 
-    profile: async (req, res, next)=> {
+    profile: async (req, res, next) => {
         try {
             const user = req.user;
             res.status(CodeStatus.OK).json({ message: "User profile", user });

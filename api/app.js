@@ -2,7 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
-import { responses, verifyToken } from './middleware/index.js';
+import { responses } from './middleware/index.js';
 import { authRoute, clientsRoute, usersRoute } from './routes/index.js';
 
 dotenv.config();

@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Dashboard</title>
+        <title>Reportes de venta</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/dashboard.css">
+        <link rel="stylesheet" href="css/reportes-venta.css">
     </head>
     <body>
         <header class="row text-white py-3 px-4" style="background-color: #2D6A8A;">
@@ -50,110 +50,119 @@
                 </nav>
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-                    <h2 class="ms-md-5">Historial de reservaciones</h2>
+                    <h2 class="ms-md-5">Reporte de ventas - Habitaciones</h2>
                     <div class="container mt-4">
-                        <!--Tabla no dinámica, solo maquetación-->
                         <table class="table-reservaciones table table-hover">
                             <thead>
                                 <tr>
                                     <th>Num.</th>
-                                    <th>Nombre</th>
-                                    <th>Fecha de Entrada</th>
-                                    <th>Fecha de Salida</th>
-                                    <th>Estado</th>
+                                    <th>Tipo de Habitación</th>
+                                    <th>Precio (USD)</th>
+                                    <th>Noches</th>
+                                    <th>Subtotal</th>
                                 </tr>
                             </thead>
-                            <tbody id="alumnosRegistrados">
+                            <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Sencilla</td>
+                                    <td>$80</td>
+                                    <td>3</td>
+                                    <td>$240</td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Doble</td>
+                                    <td>$110</td>
+                                    <td>2</td>
+                                    <td>$220</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Suite</td>
+                                    <td>$250</td>
+                                    <td>4</td>
+                                    <td>$1,000</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Sencilla</td>
+                                    <td>$80</td>
+                                    <td>1</td>
+                                    <td>$80</td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Doble</td>
+                                    <td>$110</td>
+                                    <td>3</td>
+                                    <td>$330</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2 class="ms-md-5 mt-5">Reporte de ventas - Servicios Adicionales</h2>
+                    <div class="container mt-4">
+                        <table class="table-reservaciones table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Num.</th>
+                                    <th>Servicio</th>
+                                    <th>Precio (USD)</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Masajes y tratamientos en el spa</td>
+                                    <td>$60</td>
+                                    <td>3</td>
+                                    <td>$180</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Clases adicionales de surf</td>
+                                    <td>$40</td>
+                                    <td>2</td>
+                                    <td>$80</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Tours marinos</td>
+                                    <td>$75</td>
+                                    <td>4</td>
+                                    <td>$300</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Excursiones culturales</td>
+                                    <td>$50</td>
+                                    <td>2</td>
+                                    <td>$100</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Alquiler de bicicletas</td>
+                                    <td>$15</td>
+                                    <td>5</td>
+                                    <td>$75</td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Servicio de niñera</td>
+                                    <td>$30</td>
+                                    <td>2</td>
+                                    <td>$60</td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
+                                    <td>Servicio de lavandería</td>
+                                    <td>$20</td>
+                                    <td>3</td>
+                                    <td>$60</td>
                                 </tr>
                             </tbody>
                         </table>

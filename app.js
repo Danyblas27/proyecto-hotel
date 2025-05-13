@@ -2,8 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
-import { responses } from './middleware/index.js';
-import { authRoute, clientsRoute, roomsRoute, usersRoute } from './routes/index.js';
+import { responses } from './api/middleware/index.js';
+import { authRoute, clientsRoute, roomsRoute, usersRoute } from './api/routes/index.js';
 
 dotenv.config();
 

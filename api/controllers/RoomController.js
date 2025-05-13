@@ -6,7 +6,7 @@ class RoomController {
         this.roomService = roomService; // puedes omitir si no usas capa service
     }
 
-    async create(req, res) {
+    static async create(req, res) {
         try {
             const data = req.body;
             const room = await Room.save(data);
@@ -16,7 +16,7 @@ class RoomController {
         }
     }
 
-    async getRoom(req, res) {
+    static async getRoom(req, res) {
         try {
             const room = await Room.getById(req.params.id);
             if (!room) return res.status(CodeStatus.NotFound).json({ message: "Room not found" });
@@ -26,7 +26,7 @@ class RoomController {
         }
     }
 
-    async getAllRooms(req, res) {
+    static async getAllRooms(req, res) {
         try {
             const rooms = await Room.getAll();
             res.status(CodeStatus.OK).json(rooms);
@@ -35,7 +35,7 @@ class RoomController {
         }
     }
 
-    async update(req, res) {
+    static async update(req, res) {
         try {
             const updated = await Room.update(req.params.id, req.body);
             res.status(CodeStatus.OK).json({ message: "Room updated", data: updated });
@@ -44,7 +44,7 @@ class RoomController {
         }
     }
 
-    async delete(req, res) {
+    static async delete(req, res) {
         try {
             await Room.delete(req.params.id);
             res.status(CodeStatus.OK).json({ message: "Room deleted" });
@@ -53,7 +53,7 @@ class RoomController {
         }
     }
 
-    async toggleAvailability(req, res) {
+    static async toggleAvailability(req, res) {
         try {
             const { available } = req.body;
             await Room.toggleAvailability(req.params.id, available);

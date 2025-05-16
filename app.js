@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
 import { responses } from './api/middleware/index.js';
-import { authRoute, clientsRoute, roomsRoute, usersRoute } from './api/routes/index.js';
+import { additionalServiceRoute, additionalServicesBookingRoute, authRoute, bookingRoute, clientsRoute, payMethodRoute, roomsRoute, usersRoute } from './api/routes/index.js';
 
 dotenv.config();
 
@@ -18,6 +18,11 @@ app.use('/api/auth', authRoute);
 app.use('/api/rooms', roomsRoute);
 app.use('/api/clients', clientsRoute);
 app.use('/api/users', usersRoute);
+app.use('/api/bookings', bookingRoute);
+app.use('/api/pay-methods', payMethodRoute);
+app.use('/api/additional-services', additionalServiceRoute);
+app.use('/api/additional-services-booking', additionalServicesBookingRoute);
+
 // app.use('/api/dashboard', verifyToken, dashboardRoute);
 
 //? Middleware error handler

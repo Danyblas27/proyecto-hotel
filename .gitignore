@@ -1,0 +1,57 @@
+# Node.js
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor config
+.vscode/
+.idea/
+*.sw?
+
+# Coverage & test
+coverage/
+.nyc_output/
+jest-coverage/
+
+# Build output
+dist/
+build/
+.cache/
+tmp/
+temp/
+
+# MySQL dumps or test data
+*.dump
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional: if you're using a bundler like Vite/Webpack
+.vite/
+webpack-stats.json
+
+# Optional: logs or uploads
+uploads/
+public/uploads/
+
+# Optional: if npm 
+package-lock.json

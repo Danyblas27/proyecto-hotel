@@ -1,0 +1,1 @@
+export {default as HashBcrypt} from './HashBcrypt.js';

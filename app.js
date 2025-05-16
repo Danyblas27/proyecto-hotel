@@ -1,13 +1,36 @@
-const http = require('http');
-const server = http.createServer((req, res) =>
-{
-res.writeHead(200, {'Content-Type':
-'text/html'});
-res.end('<h1 style="aling:center">Hola mundo desde nodeJS</h1>');
-});
-//asignarle un puerto para probar
-const port = 3000;
-server.listen(port, () => {
-console.log(`Servidor corriendo en
-http://localhost:${port}/`);
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+
+import { responses } from './api/middleware/index.js';
+import { additionalServiceRoute, additionalServicesBookingRoute, authRoute, bookingRoute, clientsRoute, payMethodRoute, roomsRoute, usersRoute } from './api/routes/index.js';
+
+dotenv.config();
+
+const app = express();
+
+//? Middlewares global
+app.use(express.json());
+app.use(cookieParser());
+
+//? Route
+app.use('/api/auth', authRoute);
+app.use('/api/rooms', roomsRoute);
+app.use('/api/clients', clientsRoute);
+app.use('/api/users', usersRoute);
+app.use('/api/bookings', bookingRoute);
+app.use('/api/pay-methods', payMethodRoute);
+app.use('/api/additional-services', additionalServiceRoute);
+app.use('/api/additional-services-booking', additionalServicesBookingRoute);
+
+// app.use('/api/dashboard', verifyToken, dashboardRoute);
+
+//? Middleware error handler
+app.use(responses.errorHandler);
+
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}/`);
 });

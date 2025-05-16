@@ -1,0 +1,25 @@
+const CodeStatus = {
+    OK: 200,
+    Created: 201,
+    Accepted: 202,
+    NonAuthoritativeInformation: 203,
+    NoContent: 204,
+    PermanentlyMoved: 301,
+    MovedTemporarily: 302,
+    NotModified: 304,
+    IncorrectRequest: 400,
+    Unauthorized: 401,
+    Forbidden: 403,
+    NotFound: 404,
+    NotAcceptable: 406,
+    MethodNotAllowed: 405,
+    Conflict: 409,
+    EntityRequestTooLarge: 413,
+    ApplicationUriTooLarge: 414,
+    InternalServerError: 500,
+    NotImplemented: 501,
+    ServiceNotAvailable: 503,
+    HTTPVersionNotSupported: 505,
+};
+
+export default CodeStatus;

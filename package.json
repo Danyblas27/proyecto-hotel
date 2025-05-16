@@ -6,16 +6,30 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node app.js",
+<<<<<<< HEAD
         "dev": "nodemo app.js"
+=======
+        "dev": "nodemon app.js"
+>>>>>>> e630e2cbad7a5c58cc28ad4a3686a1985018e9ac
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "bcrypt": "^5.1.1",
+        "cookie-parser": "^1.4.7",
         "dotenv": "^16.5.0",
         "express": "^5.1.0",
+<<<<<<< HEAD
         "mysql2": "^3.14.1",
         "nodemo": "^1.0.0"
+=======
+        "jsonwebtoken": "^9.0.2",
+        "mysql2": "^3.14.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.10"
+>>>>>>> e630e2cbad7a5c58cc28ad4a3686a1985018e9ac
     }
 }

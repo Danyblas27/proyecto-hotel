@@ -36,9 +36,9 @@ class User {
         const sql = `INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)`;
         const params = [data.name, data.email, hashedPassword, data.role];
         return queryHelper.query(sql, params)
-            .then(result => {
+            .then(([rows]) => {
                 return new User({
-                    id: result.insertId,
+                    id: rows.insertId,
                     ...data
                 });
             })
@@ -109,9 +109,9 @@ class User {
 
         return queryHelper.query(sql, params)
             .then(([rows]) => {
-                if (!rows[0].id) {
-                    return false;
-                }
+                if (!rows || rows.length === 0 || !rows[0]) {
+                return false;
+            }
                 return true;
             })
             .catch(err => {
@@ -121,16 +121,21 @@ class User {
     }
 
     static async update(id, data) {
-        const sql = `UPDATE users SET name = ?, email = ? WHERE id = ?`;
-        const params = [data.name, data.email, id];
+        const sql = `UPDATE users SET name = ?, email = ? WHERE email = ?`;
+        const params = [data.name, data.email, data.email];
         return queryHelper.query(sql, params)
-            .then(([rows, fields]) => {
+            .then(async([rows, fields]) => {
+                console.log('Rows affected:', rows.affectedRows);
                 if (rows.length === 0) {
                     throw new Error('User not found');
                 }
+
+                const userUpdate = await User.getUserByEmail(data.email);
                 return new User({
-                    id: id,
-                    ...data
+                    id: userUpdate.id,
+                    name: userUpdate.name,
+                    email: userUpdate.email,
+                    role: userUpdate.role
                 });
             })
             .catch(err => {

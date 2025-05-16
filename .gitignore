@@ -52,3 +52,6 @@ webpack-stats.json
 # Optional: logs or uploads
 uploads/
 public/uploads/
+
+# Optional: if npm 
+package-lock.json

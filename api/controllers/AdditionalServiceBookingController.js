@@ -1,10 +1,11 @@
-import AdditionalServicesBooking from "../models/AdditionalServicesBookingModel.js";
+
+import { AdditionalServiceBooking } from "../models/index.js";
 import { CodeStatus } from "../utils/index.js";
 
 const AdditionalServicesBookingController = {
     create: async (req, res, next) => {
         try {
-            const item = await AdditionalServicesBooking.save(req.body);
+            const item = await AdditionalServiceBooking.save(req.body);
             res.status(CodeStatus.Created).json({ message: "Additional service booked", data: item });
         } catch (err) {
             res.status(CodeStatus.InternalServerError).json({ error: err.message });

@@ -1,4 +1,5 @@
-import PayMethod from "../models/PayMethodModel.js";
+
+import { PayMethod } from "../models/index.js";
 import { CodeStatus } from "../utils/index.js";
 
 const PayMethodController = {

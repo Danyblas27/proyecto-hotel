@@ -1,4 +1,5 @@
-import AdditionalService from "../models/AdditionalServiceModel.js";
+
+import AdditionalService from "../models/AdditionalService.js";
 import { CodeStatus } from "../utils/index.js";
 
 const AdditionalServiceController = {

@@ -1,5 +1,6 @@
-import Booking from "../models/BookingModel.js";
+
 import queryHelper from "../database/queryHelper.js";
+import Booking from "../models/Booking.js";
 import { CodeStatus } from "../utils/index.js";
 
 const BookingController = {

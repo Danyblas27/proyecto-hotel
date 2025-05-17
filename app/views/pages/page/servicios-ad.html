@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- iconos, checar si dejar o quitar. Los de bootstrap no fueron suficientes -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../../../assets/css/reservacion-online.css">
+        <title>Servicios Adicionales</title>
+    </head>
+    
+    <body style="background-color: #FDF6EC;">
+        <header>
+            <nav class="navbar navbar-expand-lg p-3 sticky-top" style="background-color: #2D6A8A;">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white fs-5 ms-3" href="#"><img src="../../../assets/img/logo.jpg" alt="logo" width="50" height="50"></a>
+                    <!-- Botón del menú hamburguesa -->
+                    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- navbar -->
+                    <div class="collapse navbar-collapse justify-content-end me-3" id="navbarNav">
+                        <ul class="navbar-nav align-items-center gap-lg-3">
+                            <li class="nav-item"><a href="#" class="nav-link text-white fs-5">Reservar</a></li>         
+                            <li class="nav-item"><a href="#" class="nav-link text-white fs-5">Habitaciones</a> </li>                                
+                            <li class="nav-item"><a href="#" class="nav-link text-white fs-5">Servicios adicionales</a></li>                         
+                        </ul>
+                    </div>
+                    <div class="d-flex align-items-center ms-3">
+                      <i class="fas fa-user-circle fa-2x text-white"></i>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <h2 class="text-center mb-5">Servicios adicionales</h2><div class="row justify-content-center">
+            <div class="row justify-content-center">
+                <!-- Servicio de Spa -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/spa-sAd.jpg" class="card-img-left img-fluid" alt="Spa" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Masajes y tratamientos en el spa</h5>
+                            <p class="card-text">Disfruta de un momento de relajación y renovación con nuestros tratamientos corporales, faciales y masajes especializados.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio de clases de surf -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/surf.sAd.jpg" class="card-img-left img-fluid" alt="Clases de surf" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Clases adicionales de surf o paddleboard</h5>
+                            <p class="card-text">Aprovecha al máximo la playa con nuestras clases dirigidas por instructores certificados, aptas para todos los niveles.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div> 
+                
+                <!-- Servicio de Tours Marinos -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/tours.sAd.jpg" class="card-img-left img-fluid" alt="Tours marinos" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Tours marinos</h5>
+                            <p class="card-text">Explora el mar con experiencias como snorkel, avistamiento de delfines y recorridos en bote.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio de Excursiones -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/excursiones.sAd.jpg" class="card-img-left img-fluid" alt="Excursiones culturales" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Excursiones culturales o ecológicas</h5>
+                            <p class="card-text">Descubre la historia y naturaleza de Colima con excursiones guiadas a sitios locales y reservas ecológicas.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio de Lavandería -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/lavanderia.sAd.jpg" class="card-img-left img-fluid" alt="Lavandería" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Servicio de lavandería</h5>
+                            <p class="card-text">Mantén tu ropa limpia y fresca durante tu estancia con nuestro servicio de lavandería exprés.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio de bicicletas o scooters -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/bici.sAd.jpg" class="card-img-left img-fluid" alt="Alquiler de bicicletas" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Alquiler de bicicletas o scooters</h5>
+                            <p class="card-text">Recorre el malecón y zonas cercanas con facilidad alquilando bicicletas o scooters.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio de niñera -->
+                <div class="col-md-10 mb-4">
+                    <div class="card flex-row shadow">
+                        <img src="../../../assets/img/niñera.sAd.jpg" class="card-img-left img-fluid" alt="Niñera" style="width: 250px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Servicio de niñera</h5>
+                            <p class="card-text">Relájate mientras cuidamos de los más pequeños con personal capacitado y confiable.</p>
+                            <button class="btn btn-primary">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="p-5 text-white" style="background-color: #2D6A8A;">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo e información -->
+                    <div class="col-12 col-md-5 mb-4 mb-md-0">
+                        <div><img src="../../../assets/img/logo.jpg" alt="logo" width="50" height="50"></div>
+                            <p class="mt-4">
+                                Vive el encanto del océano. Descansa con alma.
+                            </p>
+                    </div>
+                    <!-- Sección de enlaces -->
+                    <div class="col-12 col-md-3 mb-4 mb-md-0">
+                        <h4>Hotel</h4>
+                        <p class="mt-2">Sobre nosotros</p>
+                        <p>Información legal</p>
+                    </div>
+                    <!-- Sección de contacto -->
+                    <div class="col-12 col-md-4">
+                        <h4>Contáctanos</h4>
+                        <p class="mt-2">Tel: 3121231122</p>
+                        <p>Email: hotel@hotelcolima.com</p>
+                        <p>100 Smart Street, LA, USA</p>
+                        <div class="d-flex">
+                            <i class="fab fa-facebook me-3"></i>
+                            <i class="fab fa-instagram me-3"></i>
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

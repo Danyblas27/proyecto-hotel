@@ -23,10 +23,10 @@ CREATE TABLE clients (
   name VARCHAR(100),
   last_name VARCHAR(100),
   country VARCHAR(100),
-  code_number VARCHAR(20),
-  telephone_number VARCHAR(20),
+  code_number CHAR(2),
+  telephone_number CHAR(10),
   type_doc_official VARCHAR(50),
-  id_doc_official VARCHAR(50)
+  id_doc_official ENUM('INE', 'PASAPORTE') NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- Tabla: RoomModel

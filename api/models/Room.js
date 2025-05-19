@@ -1,4 +1,5 @@
 import queryHelper from "../database/queryHelper.js";
+import { validateFields } from "../utils/validateFields.js";
 
 class Room {
     constructor(id, type, capacity, price, description, available = true) {
@@ -14,6 +15,7 @@ class Room {
         return new Room(
             json.id,
             json.type,
+            json.number,
             json.capacity,
             json.price,
             json.description,
@@ -25,6 +27,7 @@ class Room {
         return {
             id: this.id,
             type: this.type,
+            number: this.number,
             capacity: this.capacity,
             price: this.price,
             description: this.description,
@@ -37,22 +40,117 @@ class Room {
     }
 
     static async save(data) {
-        const sql = `INSERT INTO rooms (type, capacity, price, description) VALUES (?, ?, ?, ?)`;
-        const params = [data.type, data.capacity, data.price, data.description];
-        const result = await queryHelper.query(sql, params);
-        return new Room(result.insertId, data.type, data.capacity, data.price, data.description, true);
+
+
+        const names = [
+            "type",
+            "number",
+            "capacity",
+            "price",
+            "description"
+        ];
+        validateFields(names, data);
+
+        const sql = `INSERT INTO rooms (
+                        type,
+                        number,
+                        capacity, 
+                        price, 
+                        description
+                    ) VALUES (?, ?, ?, ?, ?)`;
+        const params = [
+            data.type,
+            data.number,
+            data.capacity,
+            data.price,
+            data.description
+        ];
+
+
+        return queryHelper.query(sql, params)
+            .then(result => {
+                return new Room({
+                    id: result.insertId,
+                    ...data
+                });
+            })
+            .catch(err => {
+                console.error('Error getting client by email:', err);
+                throw err;
+            });
     }
 
+
     static async getById(id) {
-        const sql = `SELECT * FROM rooms WHERE id = ?`;
-        const result = await queryHelper.query(sql, [id]);
-        return result.length > 0 ? Room.fromJson(result[0]) : null;
+        const sql = `SELECT 
+                        r.type,
+                        r.number,
+                        r.capacity, 
+                        r.price, 
+                        r.description,
+                        r.available
+        FROM rooms as r WHERE r.id = ?`;
+    
+        return await queryHelper.query(sql, [id])
+            .then(([rows, field]) => {
+
+                if (rows.length === 0) {
+                    throw new Error('No Room found');
+                }
+                
+                return new Room(rows[0]);
+            })
+            .catch(err => {
+                console.error('Error getting Room:', err);
+                throw err;
+            });
+    }
+
+    static async getByNumber(number) {
+         const sql = `SELECT 
+                        r.type,
+                        r.number,
+                        r.capacity, 
+                        r.price, 
+                        r.description,
+                        r.available
+         FROM rooms as r WHERE r.number = ?`;
+    
+        return await queryHelper.query(sql, [number])
+            .then(([rows, field]) => {
+                
+                if (rows.length === 0) {
+                    throw new Error('No Room found');
+                }
+                
+                return new Room(rows[0]);
+            })
+            .catch(err => {
+                console.error('Error getting Room:', err);
+                throw err;
+            });
     }
 
     static async getAll() {
-        const sql = `SELECT * FROM rooms`;
-        const result = await queryHelper.query(sql);
-        return Room.fromJsonArray(result);
+        const sql = `SELECT 
+                        r.type,
+                        r.number,
+                        r.capacity, 
+                        r.price, 
+                        r.description,
+                        r.available
+                    FROM rooms as r`;
+        return await queryHelper.query(sql)
+            .then(([rows, field]) => {
+                if (rows.length === 0) {
+                    throw new Error('No Rooms found');
+                }
+                return rows.map(row => new Room(row));
+            })
+            .catch(err => {
+                console.error('Error getting Rooms:', err);
+                throw err;
+            });
     }
 
     static async update(id, data) {

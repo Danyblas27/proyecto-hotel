@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestión de Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        .readonly-field {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header class="row text-white py-3 px-4" style="background-color: #2D6A8A;">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <img src="../../../assets/img/logo.jpg" alt="logo" width="50" height="50" />
+            <button class="btn btn-outline-danger">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Navegación lateral -->
+            <nav class="col-md-3 col-lg-2 d-md-block text-white vh-100" style="background-color: #2D6A8A; opacity: 75%;">
+                <div class="position-sticky pt-3">
+                    <h4 class="px-3">Bienvenido</h4>
+                    <ul class="nav flex-column px-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./dashboard.html">Historial de reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white " href="./reservacion-manual.html">Reservar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./reportes-ocupacion.html">Reporte de ocupación</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./reportes-venta.html">Reporte de ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white active" href="./usuario.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./habitaciones.html">Habitaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./servicios-adicionales.html">Servicios adicionales</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenido principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <h2 class="ms-md-5">Gestión de Usuarios</h2>
+
+                <!-- Pestañas internas -->
+                <ul class="nav nav-tabs mb-4" id="userTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#crear">Crear Usuario</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#editar">Editar Usuario</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#eliminar">Eliminar Usuario</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ver">Ver Usuarios</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Crear usuario -->
+                    <div class="tab-pane fade show active" id="crear">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="createUserForm">
+                                <h3 class="text-center mb-4">Crear Nuevo Usuario</h3>
+
+                                <div class="col-md-6">
+                                    <label for="createName" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="createName" placeholder="Ingresa el nombre" required />
+                                    <div class="text-danger small" id="errorCreateName"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="createEmail" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="createEmail" placeholder="correo@ejemplo.com" required />
+                                    <div class="text-danger small" id="errorCreateEmail"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="createPassword" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="createPassword" placeholder="Mínimo 8 caracteres" required />
+                                    <div class="text-danger small" id="errorCreatePassword"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="createRole" class="form-label">Rol</label>
+                                    <select class="form-select" id="createRole" required>
+                                        <option value="">Selecciona un rol</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Recepcion">Recepción</option>
+                                    </select>
+                                    <div class="text-danger small" id="errorCreateRole"></div>
+                                </div>
+
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn px-5 text-white" style="background-color: #7FC8C2;">
+                                        Crear Usuario
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Editar usuario -->
+                    <div class="tab-pane fade" id="editar">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="editUserForm">
+                                <h3 class="text-center mb-4">Editar Usuario Existente</h3>
+
+                                <!-- Mensaje instructivo -->
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i> Selecciona un usuario desde la tabla en la pestaña "Ver Usuarios" para editar su nombre.
+                                    </div>
+                                </div>
+
+                                <!-- Formulario de edición (oculto inicialmente) -->
+                                <div class="col-12 d-none" id="editUserFormFields">
+                                    <input type="hidden" id="editUserId">
+
+                                    <div class="col-md-6">
+                                        <label for="editName" class="form-label">Nombre</label>
+                                        <input type="text" class="form-control" id="editName" required />
+                                        <div class="text-danger small" id="errorEditName"></div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editEmail" class="form-label">Correo electrónico</label>
+                                        <input type="email" class="form-control readonly-field" id="editEmail" readonly required />
+                                        <div class="text-danger small" id="errorEditEmail"></div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editRole" class="form-label">Rol</label>
+                                        <input type="text" class="form-control readonly-field" id="editRole" readonly />
+                                        <div class="text-danger small" id="errorEditRole"></div>
+                                    </div>
+
+                                    <div class="col-12 text-end mt-3">
+                                        <button type="submit" class="btn btn-warning px-5">
+                                            Actualizar Usuario
+                                        </button>
+                                        <button type="button" id="cancelEditBtn" class="btn btn-secondary">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Eliminar usuario -->
+                    <div class="tab-pane fade" id="eliminar">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="deleteUserForm">
+                                <h3 class="text-center mb-4">Eliminar Usuario</h3>
+
+                                <!-- Mensaje instructivo -->
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i> Selecciona un usuario desde la tabla en la pestaña "Ver Usuarios" para eliminarlo.
+                                    </div>
+                                </div>
+
+                                <!-- Confirmación de eliminación (oculto inicialmente) -->
+                                <div class="col-12 d-none text-center" id="confirmDeleteSection">
+                                    <div class="alert alert-warning">
+                                        <h4>¿Estás seguro de eliminar al siguiente usuario?</h4>
+                                        <p id="userToDeleteInfo"></p>
+                                        <input type="hidden" id="deleteUserId">
+                                        
+                                        <button type="button" id="confirmDeleteBtn" class="btn btn-danger mx-2">
+                                            <i class="fas fa-trash"></i> Confirmar Eliminación
+                                        </button>
+                                        <button type="button" id="cancelDeleteBtn" class="btn btn-secondary mx-2">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Ver usuarios -->
+                    <div class="tab-pane fade" id="ver">
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle text-center">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Email</th>
+                                        <th>Rol</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody">
+                                    <!-- Aquí se insertan filas con JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../../../assets/js/views/dashboard/usuarios/usuario.js"></script>
+</body>
+</html>

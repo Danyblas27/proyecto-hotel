@@ -26,9 +26,9 @@ class RoomController {
 
     static async show(req, res, next) {
         try {
-            
+
             const data = req.query;
-            
+
             if (data.id) {
                 const room = await Room.getById(data.id);
                 responses.successResponse(res, CodeStatus.OK, "Room retrieved successfully", room);
@@ -41,7 +41,7 @@ class RoomController {
                 return;
             }
 
-            
+
             const rooms = await Room.getAll();
             responses.successResponse(res, CodeStatus.OK, "Rooms retrieved successfully", rooms);
 
@@ -61,31 +61,87 @@ class RoomController {
         }
     }
 
-    static async update(req, res) {
+    static async edit(req, res, next) {
         try {
-            const updated = await Room.update(req.params.id, req.body);
-            res.status(CodeStatus.OK).json({ message: "Room updated", data: updated });
+            const data = req.body;
+
+            if (data.number) {
+                return res.status(CodeStatus.IncorrectRequest).json({
+                    status: CodeStatus.IncorrectRequest,
+                    code: "ROOM_NUMBER_UPDATE_ERROR",
+                    message: "Room number cannot be updated"
+                });
+            }
+
+            const updated = await Room.update(
+                req.params.id,
+                data
+            );
+            res.status(CodeStatus.OK).json({
+                message: "Room updated",
+                data: updated
+            });
         } catch (error) {
             error.code = error.code || CodeStatus.ServerError;
             next(error);
         }
     }
 
-    static async delete(req, res) {
+    static async trash(req, res, next) {
         try {
+            const { id } = req.params;
+
+            const room = await Room.getById(id);
+            if (!room) {
+                return res.status(CodeStatus.NotFound).json({
+                    status: CodeStatus.NotFound,
+                    code: "ROOM_NOT_FOUND",
+                    message: "Room not found"
+                });
+            }
+
             await Room.delete(req.params.id);
-            res.status(CodeStatus.OK).json({ message: "Room deleted" });
+            res.status(CodeStatus.OK).json({
+                status: CodeStatus.OK,
+                code: "ROOM_DELETED",
+                message: "Room deleted"
+            });
+
         } catch (error) {
+
+            if (error.message === 'No Room found') {
+                return res.status(CodeStatus.NotFound).json({
+                    status: CodeStatus.NotFound,
+                    code: "ROOM_NOT_FOUND",
+                    message: "Room not found"
+                });
+            }
             error.code = error.code || CodeStatus.ServerError;
             next(error);
         }
     }
 
-    static async toggleAvailability(req, res) {
+    static async toggleAvailability(req, res, next) {
         try {
-            const { available } = req.body;
-            await Room.toggleAvailability(req.params.id, available);
-            res.status(CodeStatus.OK).json({ message: "Availability updated" });
+            const { id, available } = req.params;
+            
+            if (!id || !available) {
+                return res.status(CodeStatus.IncorrectRequest).json({
+                    status: CodeStatus.IncorrectRequest,
+                    code: "ROOM_AVAILABILITY_UPDATE_ERROR",
+                    message: "Room ID and availability status are required"
+                });
+            }
+
+            const isAvailable = Boolean(Number(available));
+
+            await Room.toggleAvailability(id, isAvailable);
+            res.status(CodeStatus.OK).json({
+                status: CodeStatus.OK,
+                code: "ROOM_AVAILABILITY_UPDATED",
+                message: "Availability updated",
+                data: { id: Number(id), isAvailable }
+            });
         } catch (error) {
             error.code = error.code || CodeStatus.ServerError;
             next(error);

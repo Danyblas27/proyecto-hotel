@@ -2,13 +2,14 @@ import queryHelper from "../database/queryHelper.js";
 import { validateFields } from "../utils/validateFields.js";
 
 class Room {
-    constructor(id, type, capacity, price, description, available = true) {
-        this.id = id;
-        this.type = type;
-        this.capacity = capacity;
-        this.price = price;
-        this.description = description;
-        this.available = available;
+    constructor(data) {
+        this.id = data.id;
+        this.type = data.type;
+        this.number = data.number;
+        this.capacity = data.capacity;
+        this.price = data.price;
+        this.description = data.description;
+        this.available = data.available ?? true;
     }
 
     static fromJson(json) {
@@ -40,7 +41,6 @@ class Room {
     }
 
     static async save(data) {
-
 
         const names = [
             "type",
@@ -83,6 +83,7 @@ class Room {
 
     static async getById(id) {
         const sql = `SELECT 
+                        r.id,
                         r.type,
                         r.number,
                         r.capacity, 
@@ -90,14 +91,14 @@ class Room {
                         r.description,
                         r.available
         FROM rooms as r WHERE r.id = ?`;
-    
+
         return await queryHelper.query(sql, [id])
             .then(([rows, field]) => {
 
                 if (rows.length === 0) {
                     throw new Error('No Room found');
                 }
-                
+
                 return new Room(rows[0]);
             })
             .catch(err => {
@@ -107,7 +108,8 @@ class Room {
     }
 
     static async getByNumber(number) {
-         const sql = `SELECT 
+        const sql = `SELECT 
+                        r.id,
                         r.type,
                         r.number,
                         r.capacity, 
@@ -115,14 +117,14 @@ class Room {
                         r.description,
                         r.available
          FROM rooms as r WHERE r.number = ?`;
-    
+
         return await queryHelper.query(sql, [number])
             .then(([rows, field]) => {
-                
+
                 if (rows.length === 0) {
                     throw new Error('No Room found');
                 }
-                
+
                 return new Room(rows[0]);
             })
             .catch(err => {
@@ -133,6 +135,7 @@ class Room {
 
     static async getAll() {
         const sql = `SELECT 
+                        r.id,
                         r.type,
                         r.number,
                         r.capacity, 
@@ -143,6 +146,8 @@ class Room {
         return await queryHelper.query(sql)
             .then(([rows, field]) => {
                 if (rows.length === 0) {
+
+                    console.log(rows);
                     throw new Error('No Rooms found');
                 }
                 return rows.map(row => new Room(row));
@@ -154,15 +159,39 @@ class Room {
     }
 
     static async update(id, data) {
-        const sql = `UPDATE rooms SET type = ?, capacity = ?, price = ?, description = ?, available = ? WHERE id = ?`;
-        const params = [data.type, data.capacity, data.price, data.description, data.available, id];
+
+        const sql = `UPDATE rooms SET 
+                        type = ?, 
+                        capacity = ?, 
+                        price = ?, 
+                        description = ?, 
+                        available = ? 
+                    WHERE id = ?`;
+        const params = [
+            data.type,
+            data.capacity,
+            data.price,
+            data.description,
+            data.available,
+            id
+        ];
         await queryHelper.query(sql, params);
         return this.getById(id);
     }
 
     static async delete(id) {
         const sql = `DELETE FROM rooms WHERE id = ?`;
-        return queryHelper.query(sql, [id]);
+        return await queryHelper.query(sql, [id])
+            .then(([rows, fields]) => {
+                if (rows.affectedRows === 0) {
+                    throw new Error('Room not found');
+                }
+                return true;
+            })
+            .catch(err => {
+                console.error('Error deleting Room:', err);
+                throw err;
+            });
     }
 
     static async toggleAvailability(id, status) {

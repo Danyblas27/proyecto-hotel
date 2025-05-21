@@ -147,7 +147,6 @@ class Room {
             .then(([rows, field]) => {
                 if (rows.length === 0) {
 
-                    console.log(rows);
                     throw new Error('No Rooms found');
                 }
                 return rows.map(row => new Room(row));

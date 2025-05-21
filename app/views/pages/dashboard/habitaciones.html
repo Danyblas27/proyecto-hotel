@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Habitaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../assets/css/habitaciones.css">
+</head>
+<body>
+    <header class="row text-white py-3 px-4" style="background-color: #2D6A8A;">
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <img src="../../../assets/img/logo.jpg" alt="logo" width="50" height="50">
+            <button class="btn btn-outline-danger">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Navegación lateral -->
+            <nav class="col-md-3 col-lg-2 d-md-block text-white vh-100" style="background-color: #2D6A8A; opacity: 75%;">
+                <div class="position-sticky pt-3">
+                    <h4 class="px-3">Bienvenido</h4>
+                    <ul class="nav flex-column px-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./dashboard.html">Historial de reservaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./reservacion-manual.html">Reservar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./reportes-ocupacion.html">Reporte de ocupación</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./reportes-venta.html">Reporte de ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./usuario.html">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white active" href="./habitaciones.html">Habitaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="./servicios-adicionales.html">Servicios adicionales</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenido principal -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+                <h2 class="ms-md-5">Gestión de Habitaciones</h2>
+
+                <!-- Pestañas -->
+                <ul class="nav nav-tabs mb-4" id="roomTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#crear-habitacion">Crear</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#editar-habitacion">Editar</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#eliminar-habitacion">Eliminar</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ver-habitaciones">Ver Todas</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Crear Habitación -->
+                    <div class="tab-pane fade show active" id="crear-habitacion">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="createRoomForm">
+                                <h3 class="text-center mb-4">Crear Nueva Habitación</h3>
+
+                                <div class="col-md-6">
+                                    <label for="roomType" class="form-label">Tipo de Habitación</label>
+                                    <input type="text" class="form-control" id="roomType" placeholder="Ej. Suite, Individual, Doble" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="roomNumber" class="form-label">Número de Habitación</label>
+                                    <input type="text" class="form-control" id="roomNumber" placeholder="Ej. 101, 202-A" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="roomCapacity" class="form-label">Capacidad</label>
+                                    <input type="number" class="form-control" id="roomCapacity" min="1" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="roomPrice" class="form-label">Precio por Noche</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="roomPrice" min="0" step="0.01" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="roomDescription" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="roomDescription" rows="3" required></textarea>
+                                </div>
+
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="btn px-5 text-white" style="background-color: #7FC8C2;">
+                                        Crear Habitación
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Editar Habitación -->
+                    <div class="tab-pane fade" id="editar-habitacion">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="editRoomForm">
+                                <h3 class="text-center mb-4">Editar Habitación</h3>
+
+                                <!-- Mensaje instructivo -->
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i> Selecciona una habitación desde la tabla en la pestaña "Ver Todas" para editarla.
+                                    </div>
+                                </div>
+
+                                <!-- Formulario de edición (oculto inicialmente) -->
+                                <div class="col-12 d-none" id="editRoomFormFields">
+                                    <input type="hidden" id="editRoomId">
+
+                                    <div class="col-md-6">
+                                        <label for="editRoomType" class="form-label">Tipo de Habitación</label>
+                                        <input type="text" class="form-control" id="editRoomType" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editRoomNumber" class="form-label">Número de Habitación</label>
+                                        <input type="text" class="form-control readonly-field" id="editRoomNumber" readonly required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editRoomCapacity" class="form-label">Capacidad</label>
+                                        <input type="number" class="form-control" id="editRoomCapacity" min="1" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="editRoomPrice" class="form-label">Precio por Noche</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="editRoomPrice" min="0" step="0.01" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="editRoomDescription" class="form-label">Descripción</label>
+                                        <textarea class="form-control" id="editRoomDescription" rows="3" required></textarea>
+                                    </div>
+
+                                    <div class="col-12 text-end mt-3">
+                                        <button type="submit" class="btn btn-warning px-5">
+                                            Actualizar Habitación
+                                        </button>
+                                        <button type="button" id="cancelEditRoomBtn" class="btn btn-secondary">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Eliminar Habitación -->
+                    <div class="tab-pane fade" id="eliminar-habitacion">
+                        <div class="container my-4 p-4 rounded shadow-sm" style="background-color: #FFFAF0; border: 2px solid #F7A399;">
+                            <form class="row g-4" id="deleteRoomForm">
+                                <h3 class="text-center mb-4">Eliminar Habitación</h3>
+
+                                <!-- Mensaje instructivo -->
+                                <div class="col-12">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i> Selecciona una habitación desde la tabla en la pestaña "Ver Todas" para eliminarla.
+                                    </div>
+                                </div>
+
+                                <!-- Confirmación de eliminación (oculto inicialmente) -->
+                                <div class="col-12 d-none text-center" id="confirmDeleteRoomSection">
+                                    <div class="alert alert-warning">
+                                        <h4>¿Estás seguro de eliminar la siguiente habitación?</h4>
+                                        <p id="roomToDeleteInfo"></p>
+                                        
+                                        <button type="button" id="confirmDeleteRoomBtn" class="btn btn-danger mx-2">
+                                            <i class="fas fa-trash"></i> Confirmar Eliminación
+                                        </button>
+                                        <button type="button" id="cancelDeleteRoomBtn" class="btn btn-secondary mx-2">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Ver Habitaciones -->
+                    <div class="tab-pane fade" id="ver-habitaciones">
+                        <button class="btn btn-primary mb-3" id="refreshRoomsBtn">
+                            <i class="fas fa-sync-alt"></i> Actualizar Lista
+                        </button>
+                        <div class="table-responsive">
+                            <table class="table table-bordered align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Número</th>
+                                        <th>Capacidad</th>
+                                        <th>Precio</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="roomTableBody">
+                                    <!-- Las habitaciones se cargarán aquí con JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../../../assets/js/views/dashboard/habitaciones/habitacion.js"></script>
+</body>
+</html>

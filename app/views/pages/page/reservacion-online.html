@@ -42,30 +42,28 @@
                     <!-- Formulario de pago -->
                     <div class="col-md-4 pe-md-5">
                       <h5>Método de pago</h5>
+                      
                       <!-- Crédito/Débito -->
                       <div class="btn-group mb-4" role="group" aria-label="Método de pago">
                         <input type="radio" class="btn-check" name="metodoPago" id="efectivo" autocomplete="off">
-                        <label class="btn btn-outline-primary" for="efectivo"><i class="fas fa-money-bill-wave me-2"></i>Efectivo</label>
+                        <label class="btn btn-outline-accent" for="efectivo"><i class="fas fa-money-bill-wave me-2"></i>Efectivo</label>
                         <input type="radio" class="btn-check" name="metodoPago" id="tarjeta" autocomplete="off" checked>
-                        <label class="btn btn-outline" style="background-color: #7FC8C2" for="tarjeta"><i class="far fa-credit-card me-2"></i>Crédito/Débito</label>
+                        <label class="btn btn-outline-accent" for="tarjeta"><i class="far fa-credit-card me-2"></i>Crédito/Débito</label>
                       </div>
-                
+
                       <!-- Campos de tarjeta -->
                       <form>
                         <div class="mb-3">
                           <label for="email" class="form-label">Email</label>
                           <input type="email" class="form-control" id="email" placeholder="Email address">
                         </div>
-                
                         <div class="mb-3">
-                        <label for="numero-tarjeta" class="form-label">Número de tarjeta</label>
-                        <div class="input-group">
-                        <span class="input-group-text bg-primary">
-                          <i class="far fa-credit-card"></i>
-                        </span>
-                        <input type="text" class="form-control" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
+                          <label for="numero-tarjeta" class="form-label">Número de tarjeta</label>
+                          <div class="input-group">
+                            <span class="input-group-text" style="background-color: #7FC8C2; color: white;"><i class="far fa-credit-card"></i></span>
+                            <input type="text" class="form-control" id="numero-tarjeta" placeholder="0000 0000 0000 0000">
+                          </div>
                         </div>
-                      </div>
 
                 
                         <div class="row mb-3">
@@ -88,13 +86,13 @@
                           </select>
                         </div>
                 
-                        <button class="btn btn-primary w-100">Pagar y Reservar</button>
+                        <button class="btn btn-dark w-100" style="background-color: #7FC8C2">Pagar y Reservar</button>
                       </form>
                     </div>
                 
                     <!-- Resumen del pedido -->
                     <div class="col-md-6 bg-light p-4 rounded">
-                      <img src="ruta-de-tu-imagen.jpg" alt="Habitación" class="img-fluid rounded" style="max-width: 120px; height: auto;">
+                      <img src="../../../assets/img/hab-suite.jpeg" alt="Habitación" class="img-fluid rounded" style="max-width: 3 00px; height: auto;">
                       <div class="flex-grow-1">
                         <div class="d-flex justify-content-between mb-3">
                           <div>

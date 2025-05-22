@@ -1,0 +1,71 @@
+export function iniciarCrearTrabajador() {
+    console.log('✅ ejecutar iniciarCrearTrabajador');
+    const form = document.getElementById('formularioRegistro');
+    if (!form) return;
+
+    function limpiarErrores() {
+        document.getElementById('regName').textContent = '';
+        document.getElementById('regEmail').textContent = '';
+        document.getElementById('regPassword').textContent = '';
+    }
+
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // 🔁 PRIMERO: obtener los valores del formulario
+        const name = form.elements['regName'].value.trim();
+        const email = form.elements['regEmail'].value.trim();
+        const password = form.elements['regPassword'].value;
+        const role = "Recepcion"
+
+        //  AHORA sí puedes armar el objeto
+        const createJob = { name, email, password, role};
+
+        console.log('📤 Datos a enviar:', createJob); // ← este ya funcionará
+
+        limpiarErrores();
+
+       // if (!validarFormulario(createJob)) return;
+
+        try {
+
+            const response = await fetch('http://localhost:3000/api/auth/register', {
+                method: 'POST',
+                headers: {
+
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ createJob })
+            });
+
+            console.log('📡 Status de creación:', response.status);
+            const data = await response.json();
+            console.log('📥 Datos de respuesta:', data);
+
+            if (response.ok) {
+                alert('Usuario creado exitosamente');
+                form.reset();
+            } else {
+                mostrarError(data.message || 'Error al crear usuario');
+            }
+        } catch (error) {
+            console.error('🚨 Error de red:', error);
+            alert('Error al conectar con el servidor');
+        }
+    });
+
+}
+/*
+function validarLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(email && password) {
+        alert("Inicio de sesión exitoso");
+        window.location.href = "home.html";
+    } else {
+        alert("Por favor completa todos los campos");
+    }
+}
+*/

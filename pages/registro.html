@@ -15,7 +15,7 @@
 
         <h1 class="titulo-principal">Registrarse</h1>
 
-        <form class="formulario-registro">
+        <form id="formularioRegistro">
             <div class="grupo-formulario">
                 <label for="regEmail" class="etiqueta">Correo electrónico</label>
                 <input type="email" id="regEmail" class="entrada" placeholder="Ingresa tu correo" required>
@@ -27,16 +27,11 @@
             </div>
 
             <div class="grupo-formulario">
-                <label for="regPhone" class="etiqueta">Número de teléfono</label>
-                <input type="tel" id="regPhone" class="entrada" placeholder="Ingresa tu número de teléfono" required>
-            </div>
-
-            <div class="grupo-formulario">
                 <label for="regPassword" class="etiqueta">Contraseña</label>
                 <input type="password" id="regPassword" class="entrada" placeholder="Crea una contraseña" required>
             </div>
 
-            <button type="button" onclick="registrar(this.form)" class="boton-principal">Continuar</button>
+            <button type="submit" class="boton-principal">Continuar</button>
         </form>
 
         <div class="enlace-alternativo">
@@ -44,19 +39,8 @@
         </div>
     </div>
 
-    <script>
-        function registrar(form) {
-            if (document.getElementById("regEmail").value &&
-                document.getElementById("regName").value &&
-                document.getElementById("regPhone").value &&
-                document.getElementById("regPassword").value) {
-                 alert("Correctamente creado");
-                 form.reset();
-            } else {
-                alert("Completa todos los campos");
-            }
-        };
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/pages/js/trabajador.js"></script>
+
 </body>
 </html>

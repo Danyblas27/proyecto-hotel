@@ -5,6 +5,13 @@ export function inicializarEliminarHabitacion() {
     document.addEventListener('eliminarHabitacionDesdeTabla', (e) => {
         habitacionSeleccionada = e.detail;
         mostrarConfirmacionEliminacion(habitacionSeleccionada);
+        
+        // Cambiar a pestaña de eliminación
+        const tabEliminar = document.querySelector('#roomTabs button[data-bs-target="#eliminar-habitacion"]');
+        if (tabEliminar) {
+            const tab = new bootstrap.Tab(tabEliminar);
+            tab.show();
+        }
     });
 
     // Confirmar eliminación
@@ -15,16 +22,9 @@ export function inicializarEliminarHabitacion() {
 }
 
 function mostrarConfirmacionEliminacion(habitacion) {
-    // Cambiar a pestaña de eliminación
-    const tabEliminar = document.querySelector('#roomTabs button[data-bs-target="#eliminar-habitacion"]');
-    if (tabEliminar) {
-        const tabInstance = new bootstrap.Tab(tabEliminar);
-        tabInstance.show();
-    }
-
     // Mostrar información de la habitación
     document.getElementById('roomToDeleteInfo').textContent = 
-        `Tipo: ${habitacion.type}, Capacidad: ${habitacion.capacity}, Precio: $${habitacion.price.toFixed(2)}`;
+        `Tipo: ${habitacion.type}, Número: ${habitacion.number}, Precio: $${habitacion.price}`;
 
     // Mostrar sección de confirmación
     document.getElementById('confirmDeleteRoomSection').classList.remove('d-none');

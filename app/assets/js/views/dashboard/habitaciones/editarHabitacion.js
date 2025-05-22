@@ -5,6 +5,13 @@ export function inicializarEditarHabitacion() {
     document.addEventListener('editarHabitacionDesdeTabla', (e) => {
         habitacionSeleccionada = e.detail;
         mostrarFormularioEdicion(habitacionSeleccionada);
+        
+        // Cambiar a pestaña de edición
+        const tabEditar = document.querySelector('#roomTabs button[data-bs-target="#editar-habitacion"]');
+        if (tabEditar) {
+            const tab = new bootstrap.Tab(tabEditar);
+            tab.show();
+        }
     });
 
     // Cancelar edición
@@ -50,15 +57,9 @@ export function inicializarEditarHabitacion() {
 }
 
 function mostrarFormularioEdicion(habitacion) {
-    // Cambiar a pestaña de edición
-    const tabEditar = document.querySelector('#roomTabs button[data-bs-target="#editar-habitacion"]');
-    if (tabEditar) {
-        const tabInstance = new bootstrap.Tab(tabEditar);
-        tabInstance.show();
-    }
-
     // Llenar formulario
     document.getElementById('editRoomType').value = habitacion.type;
+    document.getElementById('editRoomNumber').value = habitacion.number;
     document.getElementById('editRoomCapacity').value = habitacion.capacity;
     document.getElementById('editRoomPrice').value = habitacion.price;
     document.getElementById('editRoomDescription').value = habitacion.description;

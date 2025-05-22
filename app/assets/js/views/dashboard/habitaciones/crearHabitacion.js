@@ -6,6 +6,7 @@ export function inicializarCrearHabitacion() {
         
         const roomData = {
             type: document.getElementById('roomType').value.toUpperCase().trim(),
+            number: document.getElementById('roomNumber').value,
             capacity: parseInt(document.getElementById('roomCapacity').value),
             price: parseFloat(document.getElementById('roomPrice').value),
             description: document.getElementById('roomDescription').value

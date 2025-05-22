@@ -27,17 +27,20 @@ function renderizarTablaHabitaciones() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${habitacion.type}</td>
+            <td>${habitacion.number}</td>
             <td>${habitacion.capacity}</td>
-            <td>$${habitacion.price.toFixed(2)}</td>
+            <td>$${habitacion.price}</td>
             <td>${habitacion.description}</td>
             <td>
-                <button class="btn btn-sm btn-warning me-2 editar-btn" data-id="${habitacion.id}">Editar</button>
-                <button class="btn btn-sm btn-danger eliminar-btn" data-id="${habitacion.id}">Eliminar</button>
                 <select class="form-select status-select" data-id="${habitacion.id}" style="width: 120px;">
                     <option value="AVAILABLE" ${habitacion.status === 'AVAILABLE' ? 'selected' : ''}>Disponible</option>
                     <option value="OCCUPIED" ${habitacion.status === 'OCCUPIED' ? 'selected' : ''}>Ocupada</option>
                     <option value="MAINTENANCE" ${habitacion.status === 'MAINTENANCE' ? 'selected' : ''}>Mantenimiento</option>
                 </select>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-warning me-2 editar-btn" data-id="${habitacion.id}">Editar</button>
+                <button class="btn btn-sm btn-danger eliminar-btn" data-id="${habitacion.id}">Eliminar</button>
             </td>
         `;
         
@@ -46,15 +49,33 @@ function renderizarTablaHabitaciones() {
 
     // Agregar event listeners para los botones
     document.querySelectorAll('.editar-btn').forEach(btn => {
-        btn.addEventListener('click', () => editarHabitacionDesdeTabla(btn.dataset.id));
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const habitacion = habitaciones.find(h => h.id == id);
+            if (habitacion) {
+                document.dispatchEvent(new CustomEvent('editarHabitacionDesdeTabla', { 
+                    detail: habitacion 
+                }));
+            }
+        });
     });
 
     document.querySelectorAll('.eliminar-btn').forEach(btn => {
-        btn.addEventListener('click', () => eliminarHabitacionDesdeTabla(btn.dataset.id));
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.id;
+            const habitacion = habitaciones.find(h => h.id == id);
+            if (habitacion) {
+                document.dispatchEvent(new CustomEvent('eliminarHabitacionDesdeTabla', { 
+                    detail: habitacion 
+                }));
+            }
+        });
     });
 
     document.querySelectorAll('.status-select').forEach(select => {
-        select.addEventListener('change', (e) => actualizarStatusHabitacion(e.target.dataset.id, e.target.value));
+        select.addEventListener('change', (e) => {
+            actualizarStatusHabitacion(e.target.dataset.id, e.target.value);
+        });
     });
 }
 
@@ -74,24 +95,10 @@ async function actualizarStatusHabitacion(id, status) {
             throw new Error('Error al actualizar estado');
         }
         
-        mostrarHabitaciones(); // Refrescar la tabla
+        mostrarHabitaciones();
     } catch (error) {
         console.error('Error:', error);
         alert('Error al actualizar estado de habitación');
-    }
-}
-
-function editarHabitacionDesdeTabla(id) {
-    const habitacion = habitaciones.find(h => h.id === id);
-    if (habitacion) {
-        document.dispatchEvent(new CustomEvent('editarHabitacionDesdeTabla', { detail: habitacion }));
-    }
-}
-
-function eliminarHabitacionDesdeTabla(id) {
-    const habitacion = habitaciones.find(h => h.id === id);
-    if (habitacion) {
-        document.dispatchEvent(new CustomEvent('eliminarHabitacionDesdeTabla', { detail: habitacion }));
     }
 }
 

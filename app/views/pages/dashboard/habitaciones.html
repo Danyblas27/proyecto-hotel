@@ -79,12 +79,17 @@
 
                                 <div class="col-md-6">
                                     <label for="roomType" class="form-label">Tipo de Habitación</label>
-                                    <input type="text" class="form-control" id="roomType" placeholder="Ej. Suite, Individual, Doble" required>
+                                    <select class="form-select" id="roomType" required>
+                                        <option value="" disabled selected>Seleccione un tipo</option>
+                                        <option value="SUITE">SUITE</option>
+                                        <option value="DOBLE">DOBLE</option>
+                                        <option value="INDIVIDUAL">INDIVIDUAL</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="roomNumber" class="form-label">Número de Habitación</label>
-                                    <input type="text" class="form-control" id="roomNumber" placeholder="Ej. 101, 202-A" required>
+                                    <input type="text" class="form-control" id="roomNumber" placeholder="Ej. 101" required>
                                 </div>
 
                                 <div class="col-md-6">
@@ -133,7 +138,12 @@
 
                                     <div class="col-md-6">
                                         <label for="editRoomType" class="form-label">Tipo de Habitación</label>
-                                        <input type="text" class="form-control" id="editRoomType" required>
+                                        <select class="form-select" id="editRoomType" required>
+                                            <option value="" disabled selected>Seleccione un tipo</option>
+                                            <option value="SUITE">SUITE</option>
+                                            <option value="DOBLE">DOBLE</option>
+                                            <option value="INDIVIDUAL">INDIVIDUAL</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-md-6">

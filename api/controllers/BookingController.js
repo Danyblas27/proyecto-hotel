@@ -4,14 +4,48 @@ import Booking from "../models/Booking.js";
 import { CodeStatus } from "../utils/index.js";
 
 const BookingController = {
-    // Crear una reservación
+
     create: async (req, res, next) => {
         try {
-            const data = req.body;
+            const data = {
+                ...req.body,
+                user_id: req.user.id,
+            }
             const booking = await Booking.save(data);
-            res.status(CodeStatus.Created).json({ message: "Booking created successfully", data: booking });
-        } catch (err) {
-            res.status(CodeStatus.InternalServerError).json({ error: err.message });
+            res.status(CodeStatus.Created).json({
+                code: CodeStatus.Created,
+                message: "Booking created successfully",
+                data: booking
+            });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+
+    show: async (req, res, next) => {
+        try {
+
+            const booking = await Booking.getById(req.params.id);
+            if (!booking) {
+                const bookings = await Booking.getAll();
+                if (!bookings) {
+                    return res.status(CodeStatus.NotFound).json({ message: "No bookings found" });
+                }
+                return res.status(CodeStatus.NotFound).json({
+                    code: CodeStatus.NotFound,
+                    message: "Booking not found",
+                    data: bookings
+                });
+            }
+            res.status(CodeStatus.OK).json({
+                code: CodeStatus.OK,
+                message: "Booking retrieved successfully",
+                data: booking
+            });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
         }
     },
 
@@ -38,7 +72,7 @@ const BookingController = {
         }
     },
 
-    // Actualizar una reservación
+
     update: async (req, res) => {
         try {
             const { id } = req.params;
@@ -69,6 +103,50 @@ const BookingController = {
         }
     },
 
+    updateStatus: async (req, res) => {
+        try {
+            const updated = await Booking.updateStatus(req.params.id, req.body.status);
+            res.status(CodeStatus.OK).json({ message: "Status updated", data: updated });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+
+    updateKeyTime: async (req, res) => {
+        try {
+            const updated = await Booking.updateKeyTime(req.params.id, req.body.type, req.body.time);
+            res.status(CodeStatus.OK).json({ message: "Key time updated", data: updated });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+
+    cancel: async (req, res) => {
+        try {
+            const updated = await Booking.cancel(req.params.id);
+            res.status(CodeStatus.OK).json({ message: "Booking cancelled", data: updated });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+
+    checkAvailability: async (req, res) => {
+        try {
+            const { entry_date, departure_date } = req.query;
+            const rooms = await Booking.getAvailableRooms(entry_date, departure_date);
+            res.status(CodeStatus.OK).json({
+                message: "Available rooms retrieved",
+                data: rooms
+            });
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+    
     // Eliminar una reservación
     delete: async (req, res) => {
         try {

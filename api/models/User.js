@@ -103,6 +103,23 @@ class User {
             });
     }
 
+    static async existById(id){
+        const sql = `SELECT id FROM users WHERE id = ?`;
+        const params = [id];
+
+        return queryHelper.query(sql, params)
+            .then(([rows]) => {
+                if (!rows || rows.length === 0 || !rows[0]) {
+                    return false;
+                }
+                return true;
+            })
+            .catch(err => {
+                console.error('Error fetching user:', err);
+                throw err;
+            });
+    }
+
     static async existUserWithEmail(email) {
         const sql = `SELECT id FROM users WHERE email = ?`;
         const params = [email];

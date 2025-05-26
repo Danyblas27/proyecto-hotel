@@ -121,6 +121,24 @@ class Client {
                 throw err;
             });
     }
+
+    static async existById(id) {
+        const sql = `SELECT id FROM clients WHERE id = ?`;
+        const params = [id];
+
+        return queryHelper.query(sql, params)
+            .then(([rows]) => {
+                if (!rows || rows.length === 0 || !rows[0]) {
+                    return false;
+                }
+                return true;
+            })
+            .catch(err => {
+                console.error('Error checking client existence:', err);
+                throw err;
+            });
+    }
+    
     static async getClients() {
         const sql = `SELECT 
                         c.id, 

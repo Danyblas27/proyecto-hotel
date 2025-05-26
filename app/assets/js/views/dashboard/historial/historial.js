@@ -1,7 +1,3 @@
-import { inicializarCrearHabitacion } from './crearHabitacion.js';
-import { mostrarHabitaciones } from './verHabitaciones.js';
-import { inicializarEditarHabitacion } from './editarHabitacion.js';
-import { inicializarEliminarHabitacion } from './eliminarHabitacion.js';
 import obtenerRol from '../../../obtenerRol.js';
 import aplicarRestriccionesPorRol from '../../../aplicarRestriccionesPorRol.js';
 
@@ -53,6 +49,7 @@ async function loginForzado() {
     }
 }
 
+
 // Inicializar la aplicación
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -60,16 +57,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (user) {
             aplicarRestriccionesPorRol();
-            inicializarCrearHabitacion();
-            mostrarHabitaciones();
-            inicializarEditarHabitacion();
-            inicializarEliminarHabitacion();
-            
-            document.querySelector('#ver-habitaciones button')?.addEventListener('click', mostrarHabitaciones);
         }
     } catch (error) {
         console.error('Error inicializando aplicación:', error);
         // Redirigir a login si hay error de autenticación
         // window.location.href = 'login.html';
     }
-    });
+});

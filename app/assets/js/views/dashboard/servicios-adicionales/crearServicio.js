@@ -1,4 +1,5 @@
 export function inicializarCrearServicio() {
+    const token = localStorage.getItem('token');
     const form = document.getElementById('createServiceForm');
     if (!form) return;
 
@@ -19,7 +20,10 @@ export function inicializarCrearServicio() {
         try {
             const response = await fetch('http://localhost:3000/api/additional-services/create', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify({ name, description, price })
             });
 

@@ -2,6 +2,8 @@ import { inicializarCrearUsuario } from './crearUsuario.js';
 import { inicializarEditarUsuario } from './actualizarUsuario.js';
 import { inicializarEliminarUsuario } from './eliminarUsuario.js';
 import { cargarUsuarios } from './verUsuarios.js';
+import obtenerRol from '../../../obtenerRol.js';
+import aplicarRestriccionesPorRol from '../../../aplicarRestriccionesPorRol.js';
 
 async function loginForzado() {
     try {
@@ -9,7 +11,6 @@ async function loginForzado() {
             method: 'POST',
             credentials: 'include' 
         });
-
 
         const response = await fetch('http://localhost:3000/api/auth/login', {
             method: 'POST',
@@ -23,61 +24,52 @@ async function loginForzado() {
             credentials: 'include' 
         });
 
-        // 3. Manejar posibles errores
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || 'Error en el login');
         }
 
-        // 4. Procesar respuesta exitosa
         const data = await response.json();
         
         if (data.token) {
             localStorage.setItem('token', data.token);
             console.log('Login exitoso. Token almacenado:', data.token);
-            cargarUsuarios();
+            
+            // Obtener y guardar el rol del usuario después del login
+            const user = await obtenerRol();
+            if (user) {
+                localStorage.setItem('userRole', user.role.toLowerCase());
+                console.log(user.role)
+            }
+            
+            return user; // Devolver el usuario para usar en la inicialización
         } else {
-            console.error('El servidor no devolvió un token');
+            throw new Error('El servidor no devolvió un token');
         }
     } catch (error) {
         console.error('Error en login forzado:', error);
         alert(`Error al hacer login: ${error.message}`);
+        throw error; // Relanzar el error para manejarlo fuera
     }
 }
 
-// Inicializar la aplicación
-document.addEventListener('DOMContentLoaded', () => {
-    // Ejecutar el login forzado al cargar la página
-    loginForzado().then(() => {
-        inicializarCrearUsuario();
-        inicializarEditarUsuario();
-        inicializarEliminarUsuario();
-        
-        document.addEventListener('usuariosActualizados', cargarUsuarios);
-    });
-});
-/*
-await fetch('http://localhost:3000/api/auth/logout', {
-    method: 'POST'
-})
 
-await fetch('http://localhost:3000/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ name: "Hugo Isai",
-        email: "hrodriguez22@ucol.mx"})
-}).then(response => response.json()).then(data => {
-    if (data.token) {
-        localStorage.setItem('token', data.token); // Almacenar token
-        cargarUsuarios(); // Cargar datos protegidos
+// Inicializar la aplicación
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const user = await loginForzado();
+        
+        if (user) {
+            aplicarRestriccionesPorRol();
+            inicializarCrearUsuario();
+            inicializarEditarUsuario();
+            inicializarEliminarUsuario();
+        
+            document.addEventListener('usuariosActualizados', cargarUsuarios);
+        }
+    } catch (error) {
+        console.error('Error inicializando aplicación:', error);
+        // Redirigir a login si hay error de autenticación
+        // window.location.href = 'login.html';
     }
 });
-
-// Inicializar la aplicación
-document.addEventListener('DOMContentLoaded', () => {
-    inicializarCrearUsuario();
-    inicializarEditarUsuario();
-    inicializarEliminarUsuario();
-    cargarUsuarios();
-    
-    document.addEventListener('usuariosActualizados', cargarUsuarios);
-});*/

@@ -2,6 +2,7 @@
 import { CodeStatus } from "./types/index.js";
 
 export function validateFields(fields, data) {
+        
     for (const field of fields) {
         const value = data[field];
 

@@ -107,6 +107,23 @@ class Room {
             });
     }
 
+    static async existById(id) {
+        const sql = `SELECT id FROM rooms WHERE id = ?`;
+        const params = [id];
+        return queryHelper.query(sql, params)
+
+            .then(([rows]) => {
+                if (!rows || rows.length === 0 || !rows[0]) {
+                    return false;
+                }
+                return true;
+            })
+            .catch(err => {
+                console.error('Error checking room existence:', err);
+                throw err;
+            });
+    }
+
     static async getByNumber(number) {
         const sql = `SELECT 
                         r.id,
@@ -147,7 +164,6 @@ class Room {
             .then(([rows, field]) => {
                 if (rows.length === 0) {
 
-                    console.log(rows);
                     throw new Error('No Rooms found');
                 }
                 return rows.map(row => new Room(row));

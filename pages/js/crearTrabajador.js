@@ -1,5 +1,5 @@
 export function iniciarCrearTrabajador() {
-    console.log('✅ ejecutar iniciarCrearTrabajador');
+   // console.log('ejecutar iniciarCrearTrabajador');
     const form = document.getElementById('formularioRegistro');
     if (!form) return;
 
@@ -22,7 +22,7 @@ export function iniciarCrearTrabajador() {
         //  AHORA sí puedes armar el objeto
         const createJob = { name, email, password, role};
 
-        console.log('📤 Datos a enviar:', createJob); // ← este ya funcionará
+        console.log('Datos a enviar:', createJob); // ← este ya funcionará
 
         limpiarErrores();
 
@@ -36,17 +36,20 @@ export function iniciarCrearTrabajador() {
 
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ createJob })
+                body: JSON.stringify(createJob)
             });
 
-            console.log('📡 Status de creación:', response.status);
+            console.log('Status de creación:', response.status);
             const data = await response.json();
-            console.log('📥 Datos de respuesta:', data);
+            console.log('Datos de respuesta:', data);
 
             if (response.ok) {
                 alert('Usuario creado exitosamente');
                 form.reset();
-            } else {
+            } else if (response.status === 409){
+                mostrarError('Este correo esta registrado');
+            }
+            else {
                 mostrarError(data.message || 'Error al crear usuario');
             }
         } catch (error) {

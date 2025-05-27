@@ -53,22 +53,9 @@ export function iniciarCrearTrabajador() {
                 mostrarError(data.message || 'Error al crear usuario');
             }
         } catch (error) {
-            console.error('🚨 Error de red:', error);
+            console.error('Error de red:', error);
             alert('Error al conectar con el servidor');
         }
     });
 
 }
-/*
-function validarLogin() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    if(email && password) {
-        alert("Inicio de sesión exitoso");
-        window.location.href = "home.html";
-    } else {
-        alert("Por favor completa todos los campos");
-    }
-}
-*/

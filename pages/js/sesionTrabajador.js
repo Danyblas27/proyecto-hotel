@@ -17,8 +17,6 @@ export function iniciarSesionTrabajador() {
 
         limpiarErrores();
 
-
-
         if (!validarFormulario(dataJob)) return;
 
         try {
@@ -26,54 +24,67 @@ export function iniciarSesionTrabajador() {
             const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify({dataJob})
+                body: JSON.stringify(dataJob)
 
          })
-            /*.then(response => response.json()).then(data => {
-                if (data.token) {
-                    localStorage.setItem('token', data.token); // Almacenar token
 
-        }); }*/
+         const data = await response.json();
+         //funcion para obtener el rol
+         async function obtenerRol() {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) throw new Error('No hay token disponible');
 
-             data = await response.json();
+                const response = await fetch('http://localhost:3000/api/auth/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
+                if (!response.ok) throw new Error('Error al obtener perfil');
 
-            if (response.ok) {
-                if (data.token) {
-                    localStorage.setItem('token', data.token);
-                    window.location.href = 'reservacion.html'; // Redirige al dashboard
-                }
-            } else {
-                alert(data.message || 'Error al iniciar sesión');
+                const data = await response.json();
+                return data.user;
+            } catch (error) {
+                console.error('Error obteniendo rol:', error);
+                throw error;
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Error al conectar con el servidor');
+        }
+
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            console.log('Login exitoso. Token almacenado:', data.token);
+
+            alert('Inicio de sesión exitoso');
+
+            // Obtener y guardar el rol del usuario después del login
+            const user = await obtenerRol();
+            if (user) {
+                localStorage.setItem('userRole', user.role.toLowerCase());
+                console.log(user.role)
+            }
+
+            return user; // Devolver el usuario para usar en la inicialización
+        } else {
+            throw new Error('El servidor no devolvió un token');
+        }
+    } catch (error) {
+        console.error('Error en login forzado:', error);
+        alert(`Error al hacer login: ${error.message}`);
+        throw error; // Relanzar el error para manejarlo fuera
         }
     });
 }
 
 function limpiarErrores() {
-    // Implementa según necesites aun pendiente de aqui hasta el codigo de abajo para no perderme
+
 }
 
 function validarFormulario(email, password) {
-    // Implementa validación básica
+
     return true;
 }
 
 function mostrarError(mensaje) {
     alert(`Error: ${mensaje}`);
 }
-/*
-function registrar(form) {
-    if (document.getElementById("regEmail").value &&
-        document.getElementById("regName").value &&
-        document.getElementById("regPhone").value &&
-        document.getElementById("regPassword").value) {
-         alert("Correctamente creado");
-         form.reset();
-    } else {
-        alert("Completa todos los campos");
-    }
-};*/

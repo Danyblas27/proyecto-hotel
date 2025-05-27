@@ -124,7 +124,7 @@ class RoomController {
     static async toggleAvailability(req, res, next) {
         try {
             const { id, available } = req.params;
-            
+
             if (!id || !available) {
                 return res.status(CodeStatus.IncorrectRequest).json({
                     status: CodeStatus.IncorrectRequest,

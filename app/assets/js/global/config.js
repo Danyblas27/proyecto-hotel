@@ -8,6 +8,9 @@ export const urlsApi = {
             profile: '/auth/profile',
             logout: '/auth/logout'
         },
+        service: {
+            show: '/additional-services/show',
+        }
 
     }
 }

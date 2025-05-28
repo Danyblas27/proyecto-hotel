@@ -9,7 +9,7 @@ router.post("/create",
     AdditionalServiceController.create
 );
 router.get("/show", 
-    AuthMiddleware.verifyToken, 
+    //AuthMiddleware.verifyToken, 
     AdditionalServiceController.show
 );
 router.put("/edit/:id", 

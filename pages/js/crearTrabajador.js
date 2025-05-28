@@ -46,6 +46,9 @@ export function iniciarCrearTrabajador() {
             if (response.ok) {
                 alert('Usuario creado exitosamente');
                 form.reset();
+
+                  window.location.href = 'login.html';
+
             } else if (response.status === 409){
                 mostrarError('Este correo esta registrado');
             }

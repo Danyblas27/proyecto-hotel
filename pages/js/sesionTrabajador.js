@@ -57,6 +57,9 @@ export function iniciarSesionTrabajador() {
 
             alert('Inicio de sesión exitoso');
 
+            window.location.href = 'dashboard.html';
+
+
             // Obtener y guardar el rol del usuario después del login
             const user = await obtenerRol();
             if (user) {

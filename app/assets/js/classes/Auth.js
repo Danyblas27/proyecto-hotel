@@ -36,14 +36,14 @@ const Auth = {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password, role })
             });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Error al crear usuario');
+            if(response.status === 409){
+                const error = new Error('El correo electrónico ya está registrado');
+                error.status = 409;
+                throw new Error(error);
             }
-
             alert('Usuario creado exitosamente');
             window.location.href = dashboardRoutes.login;
+
         } catch (error) {
             console.error('Error al registrar usuario:', error);
             alert(error.message);
@@ -70,9 +70,14 @@ const Auth = {
 
     profile: async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/profile', {
+            const token = localStorage.getItem('token');
+            const response = await fetch(urlsApi.baseURL + urlsAuth.profile, {
                 method: 'GET',
                 credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
             if (!response.ok) throw new Error('No se pudo obtener el perfil del usuario');

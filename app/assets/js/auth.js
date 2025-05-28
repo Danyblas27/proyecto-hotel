@@ -47,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             try {
                 await Auth.register(name, email, password);
-                alert("Registro exitoso");
-                window.location.href = 'login.html';
             } catch (err) {
                 alert(err.message);
             }

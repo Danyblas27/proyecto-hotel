@@ -163,7 +163,7 @@ const BookingController = {
         }
     },
 
-    checkAvailability: async (req, res) => {
+    checkAvailability: async (req, res, next) => {
         try {
             const { entry_date, departure_date } = req.query;
             if (!entry_date || !departure_date) {

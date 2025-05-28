@@ -19,3 +19,24 @@ body, html {
     max-width: 750%;
     margin: auto;
 }
+
+.btn-accent {
+    background-color: #7FC8C2;
+    color: white;
+    border-color: #7FC8C2;
+}
+
+.btn-accent:hover {
+    background-color: #6FB5AF;
+    border-color: #6FB5AF;
+}
+
+.btn-outline-accent {
+    color: #7FC8C2;
+    border-color: #7FC8C2;
+}
+
+.btn-outline-accent:hover {
+    background-color: #7FC8C2;
+    color: white;
+}

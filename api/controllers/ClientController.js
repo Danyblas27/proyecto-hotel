@@ -2,18 +2,50 @@
 
 import { responses } from "../middleware/index.js";
 import { Client } from "../models/index.js";
-import { bodyParser, CodeStatus } from "../utils/index.js";
+import { CodeStatus } from "../utils/index.js";
+
 
 const ClientController = {
 
-    createClient: async (req, res) => {
+    create: async (req, res, next) => {
+
         try {
-            const data = await bodyParser(req);
-            const newClient = await Client.saveClient(data);
+            const data = req.body;
+            const newClient = await Client.save(data);
+            console.log("hole");
             responses.successResponse(res, CodeStatus.Created, "Client created successfully", newClient);
-        } catch (err) {
-            const statusCode = err.code || CodeStatus.ServerError;
-            responses.errorHandler(res, statusCode, err.message);
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+    edit: async (req, res, next) => {
+        try {
+            const data = req.body;
+            const updatedClient = await Client.update(data);
+            responses.successResponse(res, CodeStatus.OK, "Client updated successfully", updatedClient);
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
+        }
+    },
+
+    show: async (req, res, next) => {
+        try {
+            const data = req.query;
+
+            if (data.email) {
+                const client = await Client.getClientByEmail(data.email);
+                responses.successResponse(res, CodeStatus.OK, "Client retrieved successfully", client);
+                return;
+            }
+
+            const client = await Client.getClients();
+            responses.successResponse(res, CodeStatus.OK, "Clients retrieved successfully", client);
+
+        } catch (error) {
+            error.code = error.code || CodeStatus.ServerError;
+            next(error);
         }
     },
 

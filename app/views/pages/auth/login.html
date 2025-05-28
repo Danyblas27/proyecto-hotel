@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link href="/app/assets/css/login/login.css" rel="stylesheet">
+    <link href="/pages/styles/styles-login.css" rel="stylesheet">
 </head>
-
 <body>
 
     <div class="fondo-home-login-opaco"></div>
@@ -26,25 +24,13 @@
                 <input type="password" id="password" required>
             </div>
 
-            <button type="button" onclick="validarLogin()">Ingresar</button>
+            <button type="submit" onclick="login()">Ingresar</button>
+
         </form>
 
-        <p>¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+        <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
     </div>
 
-    <script>
-        function validarLogin() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            if (email && password) {
-                alert("Inicio de sesión exitoso");
-                window.location.href = "home.html";
-            } else {
-                alert("Por favor completa todos los campos");
-            }
-        }
-    </script>
+    <script type="module" src="../../../assets/js/auth.js"></script>
 </body>
-
 </html>

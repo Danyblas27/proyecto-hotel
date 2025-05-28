@@ -1,12 +1,3 @@
-:root {
-    --bs-body-bg: #FDF6EC;
-    --bs-primary: #2D6A8A;
-    --bs-secondary: #7FC8C2;
-    --bs-accent: #F7A399;
-    --bs-gray: #6B7280;
-    --bs-dark: #1B3C4B;
-}
-
 .hab-card, .serv-card{
     background-color: #FFFAF0;
 }

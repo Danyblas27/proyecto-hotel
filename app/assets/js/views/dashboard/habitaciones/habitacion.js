@@ -4,6 +4,7 @@ import { inicializarEditarHabitacion } from './editarHabitacion.js';
 import { inicializarEliminarHabitacion } from './eliminarHabitacion.js';
 import obtenerRol from '../../../obtenerRol.js';
 import aplicarRestriccionesPorRol from '../../../aplicarRestriccionesPorRol.js';
+import logout from '../../../logout.js';
 
 async function loginForzado() {
     try {
@@ -64,7 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             mostrarHabitaciones();
             inicializarEditarHabitacion();
             inicializarEliminarHabitacion();
-            
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    logout();
+                });
+            }
             document.querySelector('#ver-habitaciones button')?.addEventListener('click', mostrarHabitaciones);
         }
     } catch (error) {

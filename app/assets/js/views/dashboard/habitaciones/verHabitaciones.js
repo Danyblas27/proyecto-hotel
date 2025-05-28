@@ -31,13 +31,7 @@ function renderizarTablaHabitaciones() {
             <td>${habitacion.capacity}</td>
             <td>$${habitacion.price}</td>
             <td>${habitacion.description}</td>
-            <td>
-                <select class="form-select status-select" data-id="${habitacion.id}" style="width: 120px;">
-                    <option value="AVAILABLE" ${habitacion.status === 'AVAILABLE' ? 'selected' : ''}>Disponible</option>
-                    <option value="OCCUPIED" ${habitacion.status === 'OCCUPIED' ? 'selected' : ''}>Ocupada</option>
-                    <option value="MAINTENANCE" ${habitacion.status === 'MAINTENANCE' ? 'selected' : ''}>Mantenimiento</option>
-                </select>
-            </td>
+            <td>${habitacion.available ? 'Disponible' : 'Ocupada'}</td>
             <td>
                 <button class="btn btn-sm btn-warning me-2 editar-btn" data-id="${habitacion.id}">Editar</button>
                 <button class="btn btn-sm btn-danger eliminar-btn" data-id="${habitacion.id}">Eliminar</button>

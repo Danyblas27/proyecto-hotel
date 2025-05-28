@@ -3,6 +3,7 @@ import { CodeStatus, validateFields } from '../utils/index.js';
 
 class Client {
     constructor(data) {
+        this.id = data.id || null,
         this.email = data.email,
             this.name = data.name,
             this.lastName = data.lastName,

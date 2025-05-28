@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <div>
-                        <button class="btn btn-outline-danger">
+                        <button class="btn btn-outline-danger" id="logoutBtn">
                             <i class="fas fa-sign-out-alt"></i>
                         </button>
                     </div>
@@ -64,111 +64,27 @@
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                     <h2 class="ms-md-5">Historial de reservaciones</h2>
                     <div class="container mt-4">
-                        <!--Tabla no dinámica, solo maquetación-->
-                        <table class="table-reservaciones table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Num.</th>
-                                    <th>Nombre</th>
-                                    <th>Fecha de Entrada</th>
-                                    <th>Fecha de Salida</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody id="alumnosRegistrados">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                                <tr>
-                                    <td>13</td>
-                                    <td>Daniel Blasquez</td>
-                                    <td>08-05-2025</td>
-                                    <td>10-05-2025</td>
-                                    <td>Pendiente</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Fecha Entrada</th>
+                                        <th>Fecha Salida</th>
+                                        <th>Estado</th>
+                                        <th>Total</th>
+                                        <th>Método Pago</th>
+                                        <th>Habitación</th>
+                                        <th>Registrado por</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reservationsTableBody">
+                                    <!-- Los datos se cargarán dinámicamente aquí -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </main>
             </div>

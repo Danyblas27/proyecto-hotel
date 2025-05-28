@@ -4,6 +4,7 @@ import { inicializarEliminarUsuario } from './eliminarUsuario.js';
 import { cargarUsuarios } from './verUsuarios.js';
 import obtenerRol from '../../../obtenerRol.js';
 import aplicarRestriccionesPorRol from '../../../aplicarRestriccionesPorRol.js';
+import logout from '../../../logout.js';
 
 async function loginForzado() {
     try {
@@ -64,7 +65,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             inicializarCrearUsuario();
             inicializarEditarUsuario();
             inicializarEliminarUsuario();
-        
+            cargarUsuarios();
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    logout();
+                });
+            }
             document.addEventListener('usuariosActualizados', cargarUsuarios);
         }
     } catch (error) {

@@ -1,5 +1,7 @@
 import obtenerRol from '../../../obtenerRol.js';
 import aplicarRestriccionesPorRol from '../../../aplicarRestriccionesPorRol.js';
+import { cargarReservaciones } from './verReservaciones.js';
+import logout from '../../../logout.js';
 
 async function loginForzado() {
     try {
@@ -57,6 +59,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (user) {
             aplicarRestriccionesPorRol();
+            cargarReservaciones();
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    logout();
+                });
+            }
         }
     } catch (error) {
         console.error('Error inicializando aplicación:', error);

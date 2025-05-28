@@ -6,10 +6,13 @@ export async function cargarServicios() {
                 'Authorization': `Bearer ${token}`
             }
         });
-        const servicios = await response.json();
+        const data = await response.json();
         
         const tabla = document.getElementById('serviceTableBody');
         tabla.innerHTML = '';
+
+        // Asegurarnos que trabajamos con un array
+        const servicios = Array.isArray(data) ? data : data.services || data.data || [];
 
         servicios.forEach(service => {
             const fila = document.createElement('tr');

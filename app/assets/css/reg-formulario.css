@@ -1,0 +1,54 @@
+:root {
+  --bs-body-bg: #FDF6EC;
+  --bs-primary: #2D6A8A;
+  --bs-secondary: #7FC8C2;
+  --bs-accent: #F7A399;
+  --bs-gray: #6B7280;
+  --bs-dark: #1B3C4B;
+}
+
+body, html {
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  background: url('../../../assets/img/banner.png') no-repeat center center fixed;
+  background-size: cover;
+  backdrop-filter: blur(4px);
+}
+
+
+
+
+input:focus, select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.2rem rgba(45, 106, 138, 0.25);
+}
+
+.card label {
+  color: #1B3C4B;
+  font-weight: 500;
+}
+
+.card {
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9); /* Blanco translúcido */
+  backdrop-filter: blur(2px); /* Efecto de cristal si quieres */
+  -webkit-backdrop-filter: blur(2px);
+  border-radius: 1rem;
+}
+
+.fondo-difuminado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../../assets/img/banner.png');
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  z-index: -1;
+  opacity: 0.8;
+}

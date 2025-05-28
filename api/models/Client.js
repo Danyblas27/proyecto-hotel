@@ -3,7 +3,8 @@ import { CodeStatus, validateFields } from '../utils/index.js';
 
 class Client {
     constructor(data) {
-        this.email = data.email,
+            this.id = data.id || null,
+            this.email = data.email,
             this.name = data.name,
             this.lastName = data.lastName,
             this.country = data.country,
@@ -138,7 +139,7 @@ class Client {
                 throw err;
             });
     }
-    
+
     static async getClients() {
         const sql = `SELECT 
                         c.id, 

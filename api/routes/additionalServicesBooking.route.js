@@ -5,7 +5,17 @@ import AdditionalServicesBookingController from "../controllers/AdditionalServic
 
 const router = express.Router();
 
-router.post("/create", AuthMiddleware.verifyToken, AdditionalServicesBookingController.create);
-router.get("/booking/:bookingId", AuthMiddleware.verifyToken, AdditionalServicesBookingController.getByBooking);
+router.put("/add/:bookingId/:additionalServiceId", 
+    AuthMiddleware.verifyToken, 
+    AdditionalServicesBookingController.add
+);
+router.get("/show", 
+    AuthMiddleware.verifyToken, 
+    AdditionalServicesBookingController.show
+);
+router.delete("/remove/:bookingId/:additionalServiceId", 
+    AuthMiddleware.verifyToken, 
+    AdditionalServicesBookingController.remove
+);
 
 export default router;

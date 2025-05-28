@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.088);
+    color: #2D6A8A;
+}
+
+.navbar-brand img {
+    max-height: 40px;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}
+
+.habitaciones-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero-habitaciones.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.habitaciones-hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.habitacion-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.habitacion-card img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.card-text {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.precio {
+    color: #F7A399;
+    font-weight: bold;
+    margin: 0;
+}
+
+.btn-reserva {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-reserva:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+    background-color: #2D6A8A;
+    color: #2D6A8A;
+}
+
+.footer h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.footer p {
+    margin-bottom: 10px;
+    color: #ecf0f1;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #3498db;
+}
+
+@media (max-width: 768px) {
+    .habitacion-card .col-md-6 {
+        width: 100%;
+    }
+
+    .habitacion-card img {
+        height: 250px;
+    }
+
+    .habitaciones-hero h1 {
+        font-size: 2.2rem;
+    }
+}

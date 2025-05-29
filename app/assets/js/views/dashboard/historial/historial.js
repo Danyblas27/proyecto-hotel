@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
 
         if (user) {
-            aplicarRestriccionesPorRol();
+            aplicarRestriccionesPorRol(user);
             cargarReservaciones();
             // const logoutBtn = document.getElementById('logoutBtn');
             // if (logoutBtn) {

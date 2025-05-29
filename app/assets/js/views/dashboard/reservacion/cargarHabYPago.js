@@ -1,9 +1,11 @@
 export async function cargarHabitaciones() {
     try {
+        const entrada = new Date(document.getElementById('entry_date').value);
+        const salida = new Date(document.getElementById('departure_date').value);
         const token = localStorage.getItem('token');
         if (!token) return alert('Debe iniciar sesión primero');
 
-        const response = await fetch('http://localhost:3000/api/rooms/show', {
+        const response = await fetch(`http://localhost:3000/api/bookings/availability/?entry_date=${entrada}&departure_date=${salida}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -15,13 +17,11 @@ export async function cargarHabitaciones() {
         select.innerHTML = '<option value="">Seleccione una habitación</option>';
 
         habitaciones.forEach(habitacion => {
-            if (habitacion.available == 1) {
                 const option = document.createElement('option');
                 option.value = habitacion.id;
                 option.textContent = `Hab. ${habitacion.number} (${habitacion.type}) - $${habitacion.price}`;
                 option.dataset.price = habitacion.price;
                 select.appendChild(option);
-            }
         });
     } catch (error) {
         console.error('Error al cargar habitaciones:', error);

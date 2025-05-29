@@ -1,6 +1,7 @@
-export default function aplicarRestriccionesPorRol() {
-    const userRole = localStorage.getItem('userRole') || 'recepcion';
-    
+export default function aplicarRestriccionesPorRol(rol) {
+    // const userRole = localStorage.getItem('userRole') || 'recepcion';
+    const userRole = rol.role.toLowerCase();
+    console.log(userRole)
     // Mostrar/ocultar elementos del menú
     document.querySelectorAll('.menu-item').forEach(item => {
         if (item.classList.contains('all-roles')) {

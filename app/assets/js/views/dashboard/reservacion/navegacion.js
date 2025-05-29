@@ -15,6 +15,7 @@ export function inicializarFormularioReservacion() {
     document.getElementById('departure_date').addEventListener('change', () => {
         validarFechas();
         calcularTotal();
+        cargarHabitaciones();
     });
 
     document.getElementById('room_id').addEventListener('change', calcularTotal);
@@ -39,7 +40,7 @@ function configurarNavegacionPasos() {
             const nextStep = this.getAttribute('data-next');
             if (validarPasoActual(nextStep - 1)) {
                 if (nextStep === "2") {
-                    cargarHabitaciones();
+                    //cargarHabitaciones();
                 }
                 else if (nextStep === "3") {
                     cargarMetodosPago();;

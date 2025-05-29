@@ -8,6 +8,10 @@ export const urlsApi = {
             profile: '/auth/profile',
             logout: '/auth/logout'
         },
-
+        booking: {
+            create: '/bookings/create',
+            show: '/bookings/show',
+            availability: '/bookings/availability/',
+        },
     }
 }
